@@ -18,7 +18,7 @@
 // };
 
 const Cart = () => {
-    <h1>Cart</h1>
+    return (<h1>Cart</h1>)
     // return (<Button onClick={Sendorder()}>Submit Order</Button>
     // )
 }
