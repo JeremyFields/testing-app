@@ -1,13 +1,11 @@
 import '../App.css';
+import Hero from "./Hero";
 
 
 
-const Home = ({ signOut }) => {
+const Home = () => {
     return (
-        <div>
-            <h1 class="title">Home is good</h1>
-            <button onClick={signOut}>Sign out</button>
-        </div>
+        <Hero />
     )
 };
 

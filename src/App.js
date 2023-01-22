@@ -1,51 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home';
 import Navbar from './pages/Navbar';
 import Store from './pages/Store';
 import Contact from './pages/Contact';
+import Cart from './pages/Cart';
 import { Route, Routes } from "react-router-dom";
-import { Authenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator, Button } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
-function App() {
+function App({ signOut, user }) {
   return (
-
-    <Authenticator>
+    <div>
       <Navbar />
+      <Routes />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
-
-      {({ signOut, user }) => (
-
-        <div className="container">
-          <header className="App-header">
-
-
-          </header>
-          <main>
-            <Home someText={signOut} />
-
-          </main>
-        </div>
-
-      )}
-
-    </Authenticator>
-
-
-
-
-
-
-
+      <div class="signout-button">
+        <br></br>
+        <Button onClick={signOut}>Sign out</Button>
+      </div>
+    </div>
   )
 };
 
-export default App;
+export default withAuthenticator(App);

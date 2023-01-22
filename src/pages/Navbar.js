@@ -1,29 +1,52 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+    MDBNavbar,
+    MDBContainer,
+    MDBIcon,
+    MDBNavbarNav,
+    MDBNavbarItem,
+    MDBNavbarLink,
+    MDBNavbarToggler,
+    MDBNavbarBrand,
+    MDBCollapse
+} from 'mdb-react-ui-kit';
+
 const Navbar = () => {
+    const [showNavColor, setShowNavColor] = useState(false);
     return (
-        <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <Link class="navbar-brand" to="/">8-Bit Gaming</Link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <Link class="nav-link active" aria-current="page" to="/">Home</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/store">Store</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" to="/contact">Contact Us</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <MDBNavbar expand='lg' dark bgColor='dark'>
+            <MDBContainer fluid>
+                <MDBNavbarBrand href='/'>8-Bit Gaming</MDBNavbarBrand>
+                <MDBNavbarToggler
+                    type='button'
+                    data-target='#navbarColor02'
+                    aria-controls='navbarColor02'
+                    aria-expanded='false'
+                    aria-label='Toggle navigation'
+                    onClick={() => setShowNavColor(!showNavColor)}
+                >
+                    <MDBIcon icon='bars' fas />
+                </MDBNavbarToggler>
+                <MDBCollapse show={showNavColor} navbar id='navbarColor02'>
+                    <MDBNavbarNav className='me-auto mb-2 mb-lg-0'>
+                        <MDBNavbarItem className='active'>
+                            <MDBNavbarLink aria-current='page' href='/'>
+                                Home
+                            </MDBNavbarLink>
+                        </MDBNavbarItem>
+                        <MDBNavbarItem>
+                            <MDBNavbarLink href='/store'>Store</MDBNavbarLink>
+                        </MDBNavbarItem>
+                        <MDBNavbarItem>
+                            <MDBNavbarLink href='/contact'>Contact</MDBNavbarLink>
+                        </MDBNavbarItem>
+                        <MDBNavbarItem>
+                            <MDBNavbarLink href='/cart'>cart</MDBNavbarLink>
+                        </MDBNavbarItem>
+                    </MDBNavbarNav>
+                </MDBCollapse>
+            </MDBContainer>
+        </MDBNavbar>
     )
 };
 

@@ -1,0 +1,13 @@
+type Game @model @auth(rules: [{allow: private, operations: [read]}, {allow: owner}, {allow: private, provider: iam}, {allow: public, operations: [read]}, {allow: groups, groups: ["Admins"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  Name: String
+  Price: Float
+  Orders: [Order] @manyToMany(relationName: "GameOrder")
+}
+
+type Order @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  customerName: String
+  customerAddress: String
+  games: [Game] @manyToMany(relationName: "GameOrder")
+}
