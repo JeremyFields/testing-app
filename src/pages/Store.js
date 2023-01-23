@@ -18,21 +18,10 @@ const Store = () => {
 
 
             </Row>
-            {/* <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <p>Super Mario 64</p>
-                        <img class="products" src={mario} alt="Super Mario 64"></img>
-                    </div>
-                    <div class="col-sm">
-                        <p>Legend of Zelda</p>
-                        <img class="products" src={zelda} alt="Zelda 64"></img>
-                    </div>
-                    <div class="col-sm">
-                        One of three columns
-                    </div>
-                </div>
-            </div> */}
+
+            {/* <img class="products" src={mario} alt="Super Mario 64"></img>
+                        <img class="products" src={zelda} alt="Zelda 64"></img> */}
+
         </div>
     )
 };

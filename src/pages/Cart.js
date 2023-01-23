@@ -2,6 +2,7 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Order } from '../models';
 import { Auth } from 'aws-amplify';
 
+
 // const user = await Auth.currentAuthenticatedUser();
 
 const Cart = () => {

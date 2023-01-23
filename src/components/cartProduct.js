@@ -19,4 +19,5 @@ function CartProduct(props) {
     )
 }
 
+
 export default CartProduct;

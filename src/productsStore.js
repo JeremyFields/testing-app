@@ -1,3 +1,4 @@
+// TO DO: Update images, description?
 const productsArray = [
     {
         id: "1",

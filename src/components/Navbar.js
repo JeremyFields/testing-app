@@ -4,7 +4,6 @@ import { CartContext } from '../cartContext';
 import CartProduct from './cartProduct';
 
 
-
 const NavbarComponent = () => {
     const cart = useContext(CartContext);
     const [show, setShow] = useState(false);

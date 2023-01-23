@@ -124,4 +124,5 @@ export function CartProvider({ children }) {
     )
 }
 
+
 export default CartProvider;
