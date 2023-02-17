@@ -1,34 +1,77 @@
 import '../App.css';
+import { Button, Form, Col } from 'react-bootstrap';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
+
+
 
 const Contact = () => {
+
+    const [validated, setValidated] = useState(false);
+    const form1 = useRef();
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+        if (form.checkValidity() === true) {
+            alert("Thank you for the message. Someone wil get back to you soon.")
+            event.preventDefault();
+
+            emailjs.sendForm('service_fbugjr1', 'template_h187u1e', form1.current, 'L_9oEZflrSDUBHMuk')
+                .then((result) => {
+                    console.log(result.text);
+                }, (error) => {
+                    console.log(error.text);
+                });
+            event.target.reset();
+        };
+    }
+
     return (
-        <div>
-            <h1 class="title">Contact Us!</h1>
-            <div class="contact-main">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="form-email" placeholder="name@example.com" />
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Type of contact:</label>
-                        <select multiple class="form-control" id="form-contact">
-                            <option>Complaint</option>
-                            <option>Suggestion</option>
-                            <option>Praise</option>
-                            <option>Question</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea class="form-control" id="form-message" rows="3"></textarea>
-                    </div>
-                    <div class="button">
-                        <button class="form-submit">Submit form</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <Form ref={form1} noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+                <Form.Label>Name</Form.Label>
+                <Col sm={4}>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Enter name"
+                        name="user_name"
+                    />
+                </Col>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>Email address:</Form.Label>
+                <Col sm={4}>
+                    <Form.Control
+                        required type="email"
+                        placeholder="Enter email"
+                        name="user_email" />
+                </Col>
+                <Form.Text className="text-muted">
+                </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formMessage">
+                <Form.Label>Message:</Form.Label>
+                <Col sm={4}>
+                    <Form.Control
+                        required
+                        as="textarea"
+                        rows={3}
+                        placeholder="Enter message"
+                        name="message" />
+                </Col>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
     );
 }
 

@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import ProductCard from "./components/productCard";
-import { productsArray, getProductData } from "./productsStore";
+import { getProductData } from "./productsStore";
 
 export const CartContext = createContext({
     items: [],
@@ -70,17 +70,15 @@ export function CartProvider({ children }) {
         }
         else {
             setCartProducts(
-                setCartProducts(
-                    cartProducts.map(
-                        product =>
-                            // if id's match
-                            product.id === id
-                                // overwrite quantity of products (by subtracting 1 if true and in cart)
-                                ? { ...product, quantity: product.quantity - 1 }
-                                // if false, leave as-is
-                                : product
+                cartProducts.map(
+                    product =>
+                        // if id's match
+                        product.id === id
+                            // overwrite quantity of products (by subtracting 1 if true and in cart)
+                            ? { ...product, quantity: product.quantity - 1 }
+                            // if false, leave as-is
+                            : product
 
-                    )
                 )
             )
         }
@@ -92,7 +90,7 @@ export function CartProvider({ children }) {
             cartProducts =>
                 // if product object id != id, add to new array
                 cartProducts.filter(currentProduct => {
-                    return currentProduct.id != id;
+                    return currentProduct.id !== id;
                 })
         )
     }
@@ -107,7 +105,7 @@ export function CartProvider({ children }) {
         });
 
         return totalCost;
-    }
+    };
 
     const contextValue = {
         items: cartProducts,

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
-export { default as GameCreateForm } from "./GameCreateForm";
+export { default as CreateGame } from "./CreateGame";
 export { default as GameUpdateForm } from "./GameUpdateForm";
 export { default as OrderCreateForm } from "./OrderCreateForm";
 export { default as OrderUpdateForm } from "./OrderUpdateForm";

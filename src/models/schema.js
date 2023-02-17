@@ -161,6 +161,14 @@ export const schema = {
                         ]
                     }
                 },
+                "Games": {
+                    "name": "Games",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -305,5 +313,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "15ea2447b1f5fe2d0373826e0defdf67"
+    "version": "42f3156856baa37a698b55353a57f921"
 };

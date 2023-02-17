@@ -6,11 +6,169 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Badge,
+  Button,
+  Divider,
+  Flex,
+  Grid,
+  Icon,
+  ScrollView,
+  Text,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Order } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
+function ArrayField({
+  items = [],
+  onChange,
+  label,
+  inputFieldRef,
+  children,
+  hasError,
+  setFieldValue,
+  currentFieldValue,
+  defaultFieldValue,
+  lengthLimit,
+  getBadgeText,
+}) {
+  const labelElement = <Text>{label}</Text>;
+  const { tokens } = useTheme();
+  const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
+  const [isEditing, setIsEditing] = React.useState();
+  React.useEffect(() => {
+    if (isEditing) {
+      inputFieldRef?.current?.focus();
+    }
+  }, [isEditing]);
+  const removeItem = async (removeIndex) => {
+    const newItems = items.filter((value, index) => index !== removeIndex);
+    await onChange(newItems);
+    setSelectedBadgeIndex(undefined);
+  };
+  const addItem = async () => {
+    if (
+      currentFieldValue !== undefined &&
+      currentFieldValue !== null &&
+      currentFieldValue !== "" &&
+      !hasError
+    ) {
+      const newItems = [...items];
+      if (selectedBadgeIndex !== undefined) {
+        newItems[selectedBadgeIndex] = currentFieldValue;
+        setSelectedBadgeIndex(undefined);
+      } else {
+        newItems.push(currentFieldValue);
+      }
+      await onChange(newItems);
+      setIsEditing(false);
+    }
+  };
+  const arraySection = (
+    <React.Fragment>
+      {!!items?.length && (
+        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+          {items.map((value, index) => {
+            return (
+              <Badge
+                key={index}
+                style={{
+                  cursor: "pointer",
+                  alignItems: "center",
+                  marginRight: 3,
+                  marginTop: 3,
+                  backgroundColor:
+                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                }}
+                onClick={() => {
+                  setSelectedBadgeIndex(index);
+                  setFieldValue(items[index]);
+                  setIsEditing(true);
+                }}
+              >
+                {getBadgeText ? getBadgeText(value) : value.toString()}
+                <Icon
+                  style={{
+                    cursor: "pointer",
+                    paddingLeft: 3,
+                    width: 20,
+                    height: 20,
+                  }}
+                  viewBox={{ width: 20, height: 20 }}
+                  paths={[
+                    {
+                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
+                      stroke: "black",
+                    },
+                  ]}
+                  ariaLabel="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    removeItem(index);
+                  }}
+                />
+              </Badge>
+            );
+          })}
+        </ScrollView>
+      )}
+      <Divider orientation="horizontal" marginTop={5} />
+    </React.Fragment>
+  );
+  if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
+    return (
+      <React.Fragment>
+        {labelElement}
+        {arraySection}
+      </React.Fragment>
+    );
+  }
+  return (
+    <React.Fragment>
+      {labelElement}
+      {isEditing && children}
+      {!isEditing ? (
+        <>
+          <Button
+            onClick={() => {
+              setIsEditing(true);
+            }}
+          >
+            Add item
+          </Button>
+        </>
+      ) : (
+        <Flex justifyContent="flex-end">
+          {(currentFieldValue || isEditing) && (
+            <Button
+              children="Cancel"
+              type="button"
+              size="small"
+              onClick={() => {
+                setFieldValue(defaultFieldValue);
+                setIsEditing(false);
+                setSelectedBadgeIndex(undefined);
+              }}
+            ></Button>
+          )}
+          <Button
+            size="small"
+            variation="link"
+            color={tokens.colors.brand.primary[80]}
+            isDisabled={hasError}
+            onClick={addItem}
+          >
+            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+          </Button>
+        </Flex>
+      )}
+      {arraySection}
+    </React.Fragment>
+  );
+}
 export default function OrderCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -25,6 +183,7 @@ export default function OrderCreateForm(props) {
   const initialValues = {
     customerName: "",
     customerAddress: "",
+    Games: [],
   };
   const [customerName, setCustomerName] = React.useState(
     initialValues.customerName
@@ -32,15 +191,21 @@ export default function OrderCreateForm(props) {
   const [customerAddress, setCustomerAddress] = React.useState(
     initialValues.customerAddress
   );
+  const [Games, setGames] = React.useState(initialValues.Games);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setCustomerName(initialValues.customerName);
     setCustomerAddress(initialValues.customerAddress);
+    setGames(initialValues.Games);
+    setCurrentGamesValue("");
     setErrors({});
   };
+  const [currentGamesValue, setCurrentGamesValue] = React.useState("");
+  const GamesRef = React.createRef();
   const validations = {
     customerName: [],
     customerAddress: [],
+    Games: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -69,6 +234,7 @@ export default function OrderCreateForm(props) {
         let modelFields = {
           customerName,
           customerAddress,
+          Games,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -125,6 +291,7 @@ export default function OrderCreateForm(props) {
             const modelFields = {
               customerName: value,
               customerAddress,
+              Games,
             };
             const result = onChange(modelFields);
             value = result?.customerName ?? value;
@@ -150,6 +317,7 @@ export default function OrderCreateForm(props) {
             const modelFields = {
               customerName,
               customerAddress: value,
+              Games,
             };
             const result = onChange(modelFields);
             value = result?.customerAddress ?? value;
@@ -164,6 +332,49 @@ export default function OrderCreateForm(props) {
         hasError={errors.customerAddress?.hasError}
         {...getOverrideProps(overrides, "customerAddress")}
       ></TextField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              customerName,
+              customerAddress,
+              Games: values,
+            };
+            const result = onChange(modelFields);
+            values = result?.Games ?? values;
+          }
+          setGames(values);
+          setCurrentGamesValue("");
+        }}
+        currentFieldValue={currentGamesValue}
+        label={"Games"}
+        items={Games}
+        hasError={errors.Games?.hasError}
+        setFieldValue={setCurrentGamesValue}
+        inputFieldRef={GamesRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Games"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentGamesValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.Games?.hasError) {
+              runValidationTasks("Games", value);
+            }
+            setCurrentGamesValue(value);
+          }}
+          onBlur={() => runValidationTasks("Games", currentGamesValue)}
+          errorMessage={errors.Games?.errorMessage}
+          hasError={errors.Games?.hasError}
+          ref={GamesRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "Games")}
+        ></TextField>
+      </ArrayField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

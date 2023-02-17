@@ -4,12 +4,14 @@ import Navbar from './components/Navbar';
 import Store from './pages/Store';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
+import Admin from './pages/Admin';
 import { Route, Routes } from "react-router-dom";
 import { withAuthenticator, Button } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 import CartProvider from './cartContext';
+
 
 Amplify.configure(awsExports);
 
@@ -24,6 +26,8 @@ function App({ signOut, user }) {
           <Route path="/store" element={<Store />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/admin" element={<Admin />} />
+
         </Routes>
         <div class="signout-button">
           <br></br>

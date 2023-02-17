@@ -10,4 +10,6 @@ type Order @model @auth(rules: [{allow: private}]) {
   customerName: String
   customerAddress: String
   games: [Game] @manyToMany(relationName: "GameOrder")
+  Games: [String]
 }
+ 
