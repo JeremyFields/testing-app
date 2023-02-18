@@ -1,19 +1,25 @@
 // TO DO: Update images, description?
+import Mario from "./images/supermario64.jpg";
+import Zelda from "./images/zelda64.jpg"
+import DonkeyKong from "./images/donkeykong.jpg"
 const productsArray = [
     {
         id: "b58458a9-c86a-4085-9a56-88d91e609df5",
         title: "Mario",
-        price: 5.00
+        price: 5.00,
+        image: Mario
     },
     {
         id: "10d5f6e3-1036-4c79-b523-d16a1d789145",
         title: "Zelda",
-        price: 5.00
+        price: 5.00,
+        image: Zelda
     },
     {
         id: "82a16873-7c09-4470-b802-9688fd0e937d",
         title: "Donkey Kong",
-        price: 5.00
+        price: 5.00,
+        image: DonkeyKong
     }
 ]
 

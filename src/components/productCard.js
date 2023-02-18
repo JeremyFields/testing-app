@@ -11,6 +11,7 @@ function ProductCard(props) {
     return (
         <Card>
             <Card.Body>
+                <Card.Img style={{ height: "25rem", width: "20rem" }} variant="top" src={product.image} />
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>${product.price}</Card.Text>
                 {productQty > 0 ?

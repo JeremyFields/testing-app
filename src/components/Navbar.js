@@ -55,43 +55,6 @@ const NavbarComponent = () => {
             }
         }
 
-
-
-        // for (let item in cart.items) {
-        //     // alert(x + ":" + JSON.stringify(cart.items[item]["id"]));
-        //     alert(item + ":" + JSON.parse(JSON.stringify(cart.items[item])));
-        // }
-        // const fetchGames = async () => {
-        //     try {
-        //         const games = await DataStore.query(Game);
-        //         alert(games)
-        //     } catch (error) {
-        //         alert("Unsuccessful")
-        //     }
-
-        // await DataStore.save(
-        //     new Game({
-        //         customerAddress: "My first order",
-        //         customerName: "TESTING"
-        //     })
-        // );
-
-        // await DataStore.save(
-        //     new GameOrder({
-        //         customerAddress: "My first order",
-        //         customerName: "TESTING"
-        //     })
-        // );
-
-
-
-
-        //         alert("Success")
-        //     } catch (error) {
-        //         alert("Unsuccessful")
-        //     }
-        // }
-
     }
 
 
