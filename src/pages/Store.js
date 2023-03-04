@@ -1,9 +1,8 @@
-import mario from "../images/supermario64.jpg"
-import zelda from "../images/zelda64.jpg"
 import { Row, Col } from "react-bootstrap";
 import '../App.css';
-import { productsArray } from "../productsStore";
+import { productsArray, repairArray } from "../productsStore";
 import ProductCard from "../components/productCard";
+import RepairCard from "../components/repairCard";
 
 const Store = () => {
     return (
@@ -15,13 +14,23 @@ const Store = () => {
                         <ProductCard product={product} />
                     </Col>
                 ))}
-
-
             </Row>
-
-            {/* <img class="products" src={mario} alt="Super Mario 64"></img>
-                        <img class="products" src={zelda} alt="Zelda 64"></img> */}
-
+            <br></br>
+            <br></br>
+            <hr
+                style={{
+                    color: "red",
+                    backgroundColor: "grey",
+                    height: 20
+                }}
+            />
+            <Row xs={1} md={3} className="repair">
+                {repairArray.map((product, idx) => (
+                    <Col align="center" key={idx}>
+                        <RepairCard product={product} />
+                    </Col>
+                ))}
+            </Row>
         </div>
     )
 };

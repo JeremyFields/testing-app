@@ -4,8 +4,6 @@ import { CartContext } from '../cartContext';
 import CartProduct from './cartProduct';
 import { DataStore } from '@aws-amplify/datastore';
 import { Order, Game, GameOrder } from '../models';
-import { getProductData } from "../productsStore";
-
 
 const NavbarComponent = () => {
     const cart = useContext(CartContext);
@@ -42,7 +40,6 @@ const NavbarComponent = () => {
                     try {
                         const gameOrder = await DataStore.save(
                             // add customer name and customer address attribute
-                            // or create customer table and link
                             new GameOrder({
                                 gameId: game.id,
                                 orderId: order.id
@@ -101,6 +98,10 @@ const NavbarComponent = () => {
                                 <Form.Text className="text-muted">
                                     We'll never share your email with anyone else.
                                 </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Shipping address</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email" />
                             </Form.Group>
                             <Button variant="success" onClick={checkout}>
                                 Complete purchase!

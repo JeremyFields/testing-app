@@ -1,7 +1,11 @@
 import { CreateGame } from '../ui-components';
 import '../App.css';
+import { withAuthenticator, Button } from '@aws-amplify/ui-react';
+import awsExports from '../aws-exports';
+import { Amplify } from 'aws-amplify';
+Amplify.configure(awsExports);
 
-const Admin = () => {
+const Admin = ({ signOut, user }) => {
     return (
         <>
             <div>
@@ -10,8 +14,9 @@ const Admin = () => {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <CreateGame style={{ width: "20rem" }} />
             </div>
+            <Button onClick={signOut}>Sign out</Button>
         </>
     );
 }
 
-export default Admin;
+export default withAuthenticator(Admin);

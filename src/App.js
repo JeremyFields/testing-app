@@ -6,7 +6,7 @@ import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import { Route, Routes } from "react-router-dom";
-import { withAuthenticator, Button } from '@aws-amplify/ui-react';
+import { Button } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
@@ -39,4 +39,4 @@ function App({ signOut, user }) {
 };
 
 
-export default withAuthenticator(App);
+export default App;

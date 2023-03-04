@@ -1,7 +1,10 @@
 // TO DO: Update images, description?
 import Mario from "./images/supermario64.jpg";
-import Zelda from "./images/zelda64.jpg"
-import DonkeyKong from "./images/donkeykong.jpg"
+import Zelda from "./images/zelda64.jpg";
+import DonkeyKong from "./images/donkeykong.jpg";
+import Earthbound from "./images/earthbound.jpg";
+import SeventyTwoPin from "./images/72pinconnector.jpg";
+
 const productsArray = [
     {
         id: "b58458a9-c86a-4085-9a56-88d91e609df5",
@@ -20,6 +23,22 @@ const productsArray = [
         title: "Donkey Kong",
         price: 5.00,
         image: DonkeyKong
+    },
+    {
+        id: "efb4fb02-06ec-4ba4-a782-c548b01fb016",
+        title: "Earthbound",
+        price: 5.00,
+        image: Earthbound
+    }
+]
+
+// repair array
+const repairArray = [
+    {
+        id: "413c38a9-c125-470c-8d6f-41baa773962e",
+        title: "72-Pin Repair",
+        price: 10.00,
+        image: SeventyTwoPin
     }
 ]
 
@@ -34,4 +53,4 @@ function getProductData(id) {
     return productData;
 }
 
-export { productsArray, getProductData };
+export { productsArray, repairArray, getProductData };
