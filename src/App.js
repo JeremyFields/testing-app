@@ -31,7 +31,6 @@ function App({ signOut, user }) {
         </Routes>
         <div class="signout-button">
           <br></br>
-          <Button onClick={signOut}>Sign out</Button>
         </div>
       </div>
     </CartProvider>
