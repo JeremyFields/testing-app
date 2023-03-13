@@ -10,33 +10,48 @@ const NavbarComponent = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [values, setValues] = useState({});
 
-    const checkout = async () => {
+    const onFormChange = (e, updatedAt) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setValues({ ...values, [name]: value });
+        console.log(name, value);
+    };
+
+    const checkout = async (event) => {
+        event.preventDefault();
+        event.persist();
+        // alert(JSON.stringify(values))
+        const name = JSON.stringify(values["full_name"]);
+        const email_add = JSON.stringify(values["email"]);
+        const ship_add = JSON.stringify(values["ship_address"]);
+
         // loop through games in cart
         for (let item of cart.items) {
             // save the ID of each game
-            alert("Game ID: " + item.id)
+            // alert("Game ID: " + item.id)
             // query the Game DB
             const games = await DataStore.query(Game);
-            alert(JSON.stringify(games))
+            // alert(JSON.stringify(games))
 
             // inner loop - loop through games in Game DB
             for (let game of games) {
                 // if game in cart === game in DB
                 if (item.id === game.id) {
-                    alert("GAME ID IN CART MATCHES GAME ID IN DB...")
-                    alert("Cart ID: " + item.id + ", DB ID: " + game.id)
+                    // alert("GAME ID IN CART MATCHES GAME ID IN DB...")
+                    // alert("Cart ID: " + item.id + ", DB ID: " + game.id)
 
                     // save new order with those games
                     const order = await DataStore.save(
                         new Order({
-                            "customerName": "Customer Name",
-                            "customerAddress": "Lorem ipsum dolor sit amet",
+                            "customerName": name,
+                            "customerAddress": ship_add,
                             "games": game.id
                         })
                     );
 
-                    alert("Order ID: " + order.id) // works
+                    // alert("Order ID: " + order.id) // works
                     try {
                         const gameOrder = await DataStore.save(
                             // add customer name and customer address attribute
@@ -89,24 +104,26 @@ const NavbarComponent = () => {
                             ))}
 
                             <h1>Total: {cart.getTotalCost().toFixed(2)}</h1>
-                            <Form.Group className="mb-3" controlId="checkoutFormName">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Customer name" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
-                                <Form.Text className="text-muted">
-                                    We'll never share your email with anyone else.
-                                </Form.Text>
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Shipping address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
-                            </Form.Group>
-                            <Button variant="success" onClick={checkout}>
-                                Complete purchase!
-                            </Button>
+                            <Form onSubmit={checkout}>
+                                <Form.Group className="mb-3" controlId="checkoutFormName">
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control name="full_name" onChange={onFormChange} type="text" placeholder="Customer name" />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control name="email" onChange={onFormChange} type="email" placeholder="Enter email" />
+                                    <Form.Text className="text-muted">
+                                        We'll never share your email with anyone else.
+                                    </Form.Text>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Shipping address</Form.Label>
+                                    <Form.Control name="ship_address" onChange={onFormChange} type="text" placeholder="Enter address" />
+                                </Form.Group>
+                                <Button variant="success" type="submit">
+                                    Complete purchase!
+                                </Button>
+                            </Form>
                         </>
                         :
                         <h1>Cart is empty!</h1>
