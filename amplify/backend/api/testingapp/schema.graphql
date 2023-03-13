@@ -7,9 +7,9 @@ type Game @model @auth(rules: [{allow: private, operations: [read]}, {allow: own
 
 type Order @model @auth(rules: [{allow: private}]) {
   id: ID!
-  customerName: String
-  customerAddress: String
+  customerName: String!
+  customerAddress: String!
   games: [Game] @manyToMany(relationName: "GameOrder")
-  Games: [String]
+  customerEmail: AWSEmail!
 }
  

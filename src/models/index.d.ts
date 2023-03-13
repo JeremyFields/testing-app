@@ -44,10 +44,10 @@ type EagerOrder = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly customerName?: string | null;
-  readonly customerAddress?: string | null;
+  readonly customerName: string;
+  readonly customerAddress: string;
   readonly games?: (GameOrder | null)[] | null;
-  readonly Games?: (string | null)[] | null;
+  readonly customerEmail: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -58,10 +58,10 @@ type LazyOrder = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly customerName?: string | null;
-  readonly customerAddress?: string | null;
+  readonly customerName: string;
+  readonly customerAddress: string;
   readonly games: AsyncCollection<GameOrder>;
-  readonly Games?: (string | null)[] | null;
+  readonly customerEmail: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

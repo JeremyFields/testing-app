@@ -135,14 +135,14 @@ export const schema = {
                     "name": "customerName",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "customerAddress": {
                     "name": "customerAddress",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "games": {
@@ -161,13 +161,12 @@ export const schema = {
                         ]
                     }
                 },
-                "Games": {
-                    "name": "Games",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                "customerEmail": {
+                    "name": "customerEmail",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -313,5 +312,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "42f3156856baa37a698b55353a57f921"
+    "version": "949186504efa3ac85bf7fc3465faa1a6"
 };

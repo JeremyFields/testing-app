@@ -15,19 +15,19 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type OrderCreateFormInputValues = {
     customerName?: string;
     customerAddress?: string;
-    Games?: string[];
+    customerEmail?: string;
 };
 export declare type OrderCreateFormValidationValues = {
     customerName?: ValidationFunction<string>;
     customerAddress?: ValidationFunction<string>;
-    Games?: ValidationFunction<string>;
+    customerEmail?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type OrderCreateFormOverridesProps = {
     OrderCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     customerName?: PrimitiveOverrideProps<TextFieldProps>;
     customerAddress?: PrimitiveOverrideProps<TextFieldProps>;
-    Games?: PrimitiveOverrideProps<TextFieldProps>;
+    customerEmail?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type OrderCreateFormProps = React.PropsWithChildren<{
     overrides?: OrderCreateFormOverridesProps | undefined | null;
