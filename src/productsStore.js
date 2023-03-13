@@ -5,6 +5,7 @@ import DonkeyKong from "./images/donkeykong.jpg";
 import Earthbound from "./images/earthbound.jpg";
 import SeventyTwoPin from "./images/72pinconnector.jpg";
 
+// product array
 const productsArray = [
     {
         id: "b58458a9-c86a-4085-9a56-88d91e609df5",
@@ -47,6 +48,12 @@ function getProductData(id) {
 
     if (productData === undefined) {
         console.log("Product data does not exist for ID: " + id);
+        console.log("Checking if ID exists in repairArray...")
+        productData = repairArray.find(product => product.id === id);
+    }
+
+    if (productData === undefined) {
+        console.log("Product / Repair data does not exist for ID: " + id);
         return undefined;
     }
 

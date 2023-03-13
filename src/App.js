@@ -2,8 +2,8 @@ import './App.css';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Store from './pages/Store';
+import Repairs from './pages/Repairs';
 import Contact from './pages/Contact';
-import Cart from './pages/Cart';
 import Admin from './pages/Admin';
 import { Route, Routes } from "react-router-dom";
 import { Button } from '@aws-amplify/ui-react';
@@ -24,8 +24,8 @@ function App({ signOut, user }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/repairs" element={<Repairs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/admin" element={<Admin />} />
 
         </Routes>

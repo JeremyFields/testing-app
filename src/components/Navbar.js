@@ -30,7 +30,7 @@ const NavbarComponent = () => {
                     // save new order with those games
                     const order = await DataStore.save(
                         new Order({
-                            "customerName": "NewCustomer",
+                            "customerName": "Customer Name",
                             "customerAddress": "Lorem ipsum dolor sit amet",
                             "games": game.id
                         })
@@ -46,7 +46,7 @@ const NavbarComponent = () => {
                             })
                         )
                     } catch (error) {
-                        alert("Failed to create game order.")
+                        alert("Failed to create game order");
                     };
                 }
             }
@@ -67,6 +67,7 @@ const NavbarComponent = () => {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/store">Store</Nav.Link>
+                            <Nav.Link href="/repairs">Repairs</Nav.Link>
                             <Nav.Link href="/contact">Contact</Nav.Link>
                         </Nav>
                         <Nav>
