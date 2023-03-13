@@ -47,7 +47,8 @@ const NavbarComponent = () => {
                         new Order({
                             "customerName": name,
                             "customerAddress": ship_add,
-                            "games": game.id
+                            "customerEmail": email_add,
+                            "games": [game.id]
                         })
                     );
 
