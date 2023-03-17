@@ -161,13 +161,6 @@ export const schema = {
                         ]
                     }
                 },
-                "customerEmail": {
-                    "name": "customerEmail",
-                    "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -312,5 +305,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.4",
-    "version": "949186504efa3ac85bf7fc3465faa1a6"
+    "version": "daf7acb77bd3eb16017dddb8f37647e5"
 };

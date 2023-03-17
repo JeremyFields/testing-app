@@ -29,30 +29,23 @@ const NavbarComponent = () => {
 
         // loop through games in cart
         for (let item of cart.items) {
-            // save the ID of each game
-            // alert("Game ID: " + item.id)
             // query the Game DB
             const games = await DataStore.query(Game);
-            // alert(JSON.stringify(games))
 
             // inner loop - loop through games in Game DB
             for (let game of games) {
                 // if game in cart === game in DB
                 if (item.id === game.id) {
-                    // alert("GAME ID IN CART MATCHES GAME ID IN DB...")
-                    // alert("Cart ID: " + item.id + ", DB ID: " + game.id)
 
                     // save new order with those games
                     const order = await DataStore.save(
                         new Order({
                             "customerName": name,
                             "customerAddress": ship_add,
-                            "customerEmail": email_add,
                             "games": [game.id]
                         })
                     );
 
-                    // alert("Order ID: " + order.id) // works
                     try {
                         const gameOrder = await DataStore.save(
                             // add customer name and customer address attribute
@@ -61,6 +54,10 @@ const NavbarComponent = () => {
                                 orderId: order.id
                             })
                         )
+                        alert("Thank you for your order!")
+                        
+                        cart.deleteFromCart(game.id)
+
                     } catch (error) {
                         alert("Failed to create game order");
                     };

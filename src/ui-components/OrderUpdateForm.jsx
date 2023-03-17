@@ -26,16 +26,12 @@ export default function OrderUpdateForm(props) {
   const initialValues = {
     customerName: "",
     customerAddress: "",
-    customerEmail: "",
   };
   const [customerName, setCustomerName] = React.useState(
     initialValues.customerName
   );
   const [customerAddress, setCustomerAddress] = React.useState(
     initialValues.customerAddress
-  );
-  const [customerEmail, setCustomerEmail] = React.useState(
-    initialValues.customerEmail
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -44,7 +40,6 @@ export default function OrderUpdateForm(props) {
       : initialValues;
     setCustomerName(cleanValues.customerName);
     setCustomerAddress(cleanValues.customerAddress);
-    setCustomerEmail(cleanValues.customerEmail);
     setErrors({});
   };
   const [orderRecord, setOrderRecord] = React.useState(order);
@@ -59,7 +54,6 @@ export default function OrderUpdateForm(props) {
   const validations = {
     customerName: [{ type: "Required" }],
     customerAddress: [{ type: "Required" }],
-    customerEmail: [{ type: "Required" }, { type: "Email" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -88,7 +82,6 @@ export default function OrderUpdateForm(props) {
         let modelFields = {
           customerName,
           customerAddress,
-          customerEmail,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -146,7 +139,6 @@ export default function OrderUpdateForm(props) {
             const modelFields = {
               customerName: value,
               customerAddress,
-              customerEmail,
             };
             const result = onChange(modelFields);
             value = result?.customerName ?? value;
@@ -172,7 +164,6 @@ export default function OrderUpdateForm(props) {
             const modelFields = {
               customerName,
               customerAddress: value,
-              customerEmail,
             };
             const result = onChange(modelFields);
             value = result?.customerAddress ?? value;
@@ -186,32 +177,6 @@ export default function OrderUpdateForm(props) {
         errorMessage={errors.customerAddress?.errorMessage}
         hasError={errors.customerAddress?.hasError}
         {...getOverrideProps(overrides, "customerAddress")}
-      ></TextField>
-      <TextField
-        label="Customer email"
-        isRequired={true}
-        isReadOnly={false}
-        value={customerEmail}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              customerName,
-              customerAddress,
-              customerEmail: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.customerEmail ?? value;
-          }
-          if (errors.customerEmail?.hasError) {
-            runValidationTasks("customerEmail", value);
-          }
-          setCustomerEmail(value);
-        }}
-        onBlur={() => runValidationTasks("customerEmail", customerEmail)}
-        errorMessage={errors.customerEmail?.errorMessage}
-        hasError={errors.customerEmail?.hasError}
-        {...getOverrideProps(overrides, "customerEmail")}
       ></TextField>
       <Flex
         justifyContent="space-between"

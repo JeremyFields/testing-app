@@ -47,7 +47,6 @@ type EagerOrder = {
   readonly customerName: string;
   readonly customerAddress: string;
   readonly games?: (GameOrder | null)[] | null;
-  readonly customerEmail: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -61,7 +60,6 @@ type LazyOrder = {
   readonly customerName: string;
   readonly customerAddress: string;
   readonly games: AsyncCollection<GameOrder>;
-  readonly customerEmail: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
