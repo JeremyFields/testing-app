@@ -17,6 +17,12 @@
       },
       "storage": {
         "s3testingappstorageaecc2693": {}
+      },
+      "api": {
+        "testingapp": {}
+      },
+      "analytics": {
+        "testingapp": {}
       }
     }
   }

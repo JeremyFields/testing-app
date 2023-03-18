@@ -3,12 +3,26 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import "jquery";
-import "popper.js/dist/umd/popper";
 import "bootstrap/dist/js/bootstrap";
-import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/css/bootstrap.css";
+import { Analytics } from 'aws-amplify';
 
+Analytics.autoTrack('session', {
+  enable: true,
+  immediate: true
+});
+
+Analytics.autoTrack('pageView', {
+  enable: true,
+  type: 'SPA',
+  immediate: true
+});
+
+Analytics.autoTrack('event', {
+  enable: true,
+  immediate: true
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,8 +32,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

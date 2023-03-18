@@ -34,44 +34,49 @@ const Contact = () => {
     }
 
     return (
-        <Form ref={form1} noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group controlId="formName">
-                <Form.Label>Name</Form.Label>
-                <Col sm={4}>
-                    <Form.Control
-                        required
-                        type="text"
-                        placeholder="Enter name"
-                        name="user_name"
-                    />
-                </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Email address:</Form.Label>
-                <Col sm={4}>
-                    <Form.Control
-                        required type="email"
-                        placeholder="Enter email"
-                        name="user_email" />
-                </Col>
-                <Form.Text className="text-muted">
-                </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formMessage">
-                <Form.Label>Message:</Form.Label>
-                <Col sm={4}>
-                    <Form.Control
-                        required
-                        as="textarea"
-                        rows={3}
-                        placeholder="Enter message"
-                        name="message" />
-                </Col>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+        <>
+            <h1 class="title">Contact Us!</h1>
+            <div class="contact-form">
+                <Form ref={form1} noValidate validated={validated} onSubmit={handleSubmit}>
+                    <Form.Group controlId="formName">
+                        <Form.Label>Name</Form.Label>
+                        <Col sm={30}>
+                            <Form.Control
+                                required
+                                type="text"
+                                placeholder="Enter name"
+                                name="user_name"
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formEmail">
+                        <Form.Label>Email address:</Form.Label>
+                        <Col sm={12}>
+                            <Form.Control
+                                required type="email"
+                                placeholder="Enter email"
+                                name="user_email" />
+                        </Col>
+                        <Form.Text className="text-muted">
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formMessage">
+                        <Form.Label>Message:</Form.Label>
+                        <Col sm={30}>
+                            <Form.Control
+                                required
+                                as="textarea"
+                                rows={3}
+                                placeholder="Enter message"
+                                name="message" />
+                        </Col>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </div>
+        </>
     );
 }
 

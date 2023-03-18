@@ -19,13 +19,10 @@
 }
 
 .contact-form {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-.signout-button {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  width: 100%;
 }
 
 .submit-order {
