@@ -55,7 +55,7 @@ const NavbarComponent = () => {
                             })
                         )
                         alert("Thank you for your order!")
-                        
+
                         cart.deleteFromCart(game.id)
 
                     } catch (error) {

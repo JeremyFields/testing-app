@@ -1,5 +1,5 @@
 import { GameCreateForm } from '../ui-components';
-import { OrderUpdateForm } from '../ui-components';
+import { OrderCreateForm } from '../ui-components';
 import '../App.css';
 import { Authenticator, Button } from '@aws-amplify/ui-react';
 import awsExports from '../aws-exports';
@@ -16,8 +16,7 @@ const Admin = () => {
                         <h4 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>Add new game to database:</h4>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        {/* <GameCreateForm style={{ width: "20rem" }} /> */}
-                        <OrderUpdateForm />
+                        <GameCreateForm style={{ width: "20rem" }} />
                     </div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <Button class="signout-button" onClick={signOut}>Sign out</Button>
